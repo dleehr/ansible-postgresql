@@ -1,4 +1,9 @@
 ---
-- name: Install django
-  sudo_user: "{{ dplace.user }}"
-  pip: name="Django" version=1.6 virtualenv="/home/{{ dplace.user }}/{{ dplace.env_dir }}"
+# Will need to convert to ssh and key pair auth
+- name: Clone D-PLACE repo
+  git: repo={{ dplace.repo }}
+       dest="/home/{{ dplace.user }}/{{ dplace.src_dir }}"
+  
+- name: Install python dependencies in virtualenv
+  pip: requirements="/home/{{ dplace.user }}/{{ dplace.src_dir }}/requirements.txt"
+       virtualenv="/home/{{ dplace.user }}/{{ dplace.env_dir }}"

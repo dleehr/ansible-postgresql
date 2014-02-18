@@ -7,5 +7,7 @@
     - gdal-bin
     - python-psycopg2
     - python-virtualenv
+    - git
+    - python-dev
   tags:
     - packages

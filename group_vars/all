@@ -35,6 +35,8 @@ postgis:
   version: 2.1
 
 dplace:
+  repo: https://github.com/NESCent/dplace-models.git
   user: dplace_user
   password: dplace_pass_changeme
   env_dir: env_dplace
+  src_dir: src

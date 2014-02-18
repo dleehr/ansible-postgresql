@@ -30,3 +30,6 @@ pgbouncer:
 
     auth_type: md5
     auth_file: /etc/pgbouncer/userlist.txt
+
+postgis:
+  version: 2.1

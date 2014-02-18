@@ -3,13 +3,21 @@
 
 ---
 - name: Create Postgres database for D-PLACE
-  postgresql_db: name={{ dplace.db_name }} login_host=127.0.0.1
+  postgresql_db: name={{ dplace.db_name }}
+  sudo: yes
+  sudo_user: postgres
 
-- name: Create Postgres user for D-PLACE, grant access
-  postgresql_user: db={{ dplace.db_name }} name={{ dplace.db_user }} password={{ dplace.db_password }} priv=ALL login_host=127.0.0.1
+- name: create the postgresql user for application
+  postgresql_user: name={{ dplace.db_user }}
+  sudo: yes
+  sudo_user: postgres
 
 - name: Set privileges
-  postgresql_user: name={{ dplace.db_user }} role_attr_flags=NOSUPERUSER,NOCREATEDB login_host=127.0.0.1
+  postgresql_user: name={{ dplace.db_user }} role_attr_flags=NOSUPERUSER,NOCREATEDB
+  sudo: yes
+  sudo_user: postgres
   
 - name: Activate PostGIS extensions on dplace_db
-  shell: "psql -U postgres -h 127.0.0.1 {{ dplace.db_name }} -c \"CREATE EXTENSION IF NOT EXISTS postgis;\" && psql -U postgres -h 127.0.0.1 -c \"CREATE EXTENSION IF NOT EXISTS postgis_topology;\""
+  shell: "psql {{ dplace.db_name }} -c \"CREATE EXTENSION IF NOT EXISTS postgis;CREATE EXTENSION IF NOT EXISTS postgis_topology;\""
+  sudo: yes
+  sudo_user: postgres

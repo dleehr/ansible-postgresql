@@ -2,5 +2,5 @@
 
 - include: dplace_deps.yml
 - include: dplace_user.yml
-- include: dplace_setupdb.yml sudo_user={{ postgresql.user }}
+- include: dplace_setupdb.yml
 - include: dplace.yml sudo_user={{ dplace.user }}

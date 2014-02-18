@@ -1,11 +1,4 @@
 # Based on http://stackoverflow.com/questions/20040141/ansible-command-from-inside-virtualenv
-- name: Create Python virtualenv
+- name: Install django
   sudo_user: "{{ dplace.user }}"
-  shell: virtualenv "$HOME/{{ dplace.env_dir }}"
-         creates="$HOME/{{ dplace.env_dir }}/bin/activate"
-- name: "Copy virtualenv wrapper file"
-  sudo_user: "{{ dplace.user }}"
-  # The copy and synchronize modules don't translate $HOME remotely.
-  copy: src=../files/venv_wrapper
-               dest="/home/{{ dplace.user }}/{{ dplace.env_dir }}/bin/venv_wrapper"
-               mode=0755
+  pip: name="Django" version=1.6 virtualenv="/home/{{ dplace.user }}/{{ dplace.env_dir }}"

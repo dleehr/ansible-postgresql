@@ -7,3 +7,9 @@
 - name: Install python dependencies in virtualenv
   pip: requirements="/home/{{ dplace.user }}/{{ dplace.src_dir }}/requirements.txt"
        virtualenv="/home/{{ dplace.user }}/{{ dplace.env_dir }}"
+
+# Still todo:
+## Edit settings.py / settings.template
+## createdb in postgres
+## django_manage syncdb
+## django_manage migrate

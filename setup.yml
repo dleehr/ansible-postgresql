@@ -1,7 +1,13 @@
 ---
-- name: 'PostgreSQL Playbook'
-  hosts: postgresql_nodes
+- name: 'PostgreSQL-PostGIS Playbook'
+  hosts: postgresql_servers
 
   roles:
     - postgresql
+    - postgis
     - pgbouncer
+
+- name: 'D-PLACE Playbook'
+  hosts: dplace_servers
+  roles:
+    - geodjango_deps

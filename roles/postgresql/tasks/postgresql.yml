@@ -23,13 +23,3 @@
     - restart postgresql
   tags:
     - configuration
-
-- name: Install PostGIS
-  apt: pkg={{ item.major }}-{{ postgresql.version }}-{{ item.minor }}-{{ postgis.version }} state=installed update-cache=yes
-  register: postgis_install
-  with_items:
-    -
-      major: postgresql
-      minor: postgis
-  tags:
-    - packages

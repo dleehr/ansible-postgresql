@@ -1,0 +1,15 @@
+# This should happen on the database server
+# via https://github.com/ansible/ansible-examples/blob/master/language_features/postgresql.yml
+
+---
+- name: Create Postgres database for D-PLACE
+  postgresql_db: name={{ dplace.db_name }} login_host=127.0.0.1
+
+- name: Create Postgres user for D-PLACE, grant access
+  postgresql_user: db={{ dplace.db_name }} name={{ dplace.db_user }} password={{ dplace.db_password }} priv=ALL login_host=127.0.0.1
+
+- name: Set privileges
+  postgresql_user: name={{ dplace.db_user }} role_attr_flags=NOSUPERUSER,NOCREATEDB login_host=127.0.0.1
+  
+- name: Activate PostGIS extensions on dplace_db
+  shell: "psql -U postgres -h 127.0.0.1 {{ dplace.db_name }} -c \"CREATE EXTENSION IF NOT EXISTS postgis;\" && psql -U postgres -h 127.0.0.1 -c \"CREATE EXTENSION IF NOT EXISTS postgis_topology;\""

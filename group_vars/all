@@ -40,3 +40,6 @@ dplace:
   password: dplace_pass_changeme
   env_dir: env_dplace
   src_dir: src
+  db_name: dplace_dev
+  db_user: dplace_user
+  db_password: dplace_pass_changeme

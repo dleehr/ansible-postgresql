@@ -1,0 +1,10 @@
+---
+- name: Install GeoDjango dependencies
+  apt: pkg={{ item }} state=installed update-cache=yes
+  with_items:
+    - binutils
+    - libproj-dev
+    - gdal-bin
+    - python-psycopg2
+  tags:
+    - packages

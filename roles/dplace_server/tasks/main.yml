@@ -1,3 +1,5 @@
 ---
 
-- include: geodjango_deps.yml
+- include: dplace_deps.yml
+- include: dplace_user.yml
+- include: dplace.yml

@@ -1,0 +1,5 @@
+# Based on http://stackoverflow.com/questions/20040141/ansible-command-from-inside-virtualenv
+- name: Create Python virtualenv
+  sudo_user: "{{ dplace.user }}"
+  shell: virtualenv "$HOME/{{ dplace.env_dir }}"
+         creates="$HOME/{{ dplace.env_dir }}/bin/activate"

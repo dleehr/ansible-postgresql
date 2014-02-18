@@ -10,4 +10,4 @@
 - name: 'D-PLACE Playbook'
   hosts: dplace_servers
   roles:
-    - geodjango_deps
+    - dplace_server

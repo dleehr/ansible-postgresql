@@ -1,4 +1,4 @@
-# Based on http://stackoverflow.com/questions/20040141/ansible-command-from-inside-virtualenv
+---
 - name: Install django
   sudo_user: "{{ dplace.user }}"
   pip: name="Django" version=1.6 virtualenv="/home/{{ dplace.user }}/{{ dplace.env_dir }}"

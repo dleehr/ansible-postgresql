@@ -1,7 +1,6 @@
 ---
 - name: 'PostgreSQL-PostGIS Playbook'
   hosts: postgresql_servers
-
   roles:
     - postgresql
     - postgis

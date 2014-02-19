@@ -1,3 +1,6 @@
 ---
 - name: Create D-PLACE user
   user: name={{ dplace.user }} password={{ dplace.password }} shell="/bin/bash"
+
+- name: Set ownership of source path
+  file: path={{ dplace.install_path }} owner={{ dplace.user }} group={{ dplace.user }} state=directory

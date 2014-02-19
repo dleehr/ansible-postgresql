@@ -2,23 +2,23 @@
 # Will need to convert to ssh and key pair auth
 - name: Clone D-PLACE repo
   git: repo={{ dplace.repo }}
-       dest="/home/{{ dplace.user }}/{{ dplace.src_dir }}"
+       dest={{ dplace.install_path }}
   sudo: yes
   sudo_user: "{{ dplace.user }}"
   
 - name: Install python dependencies in virtualenv
-  pip: requirements="/home/{{ dplace.user }}/{{ dplace.src_dir }}/requirements.txt"
+  pip: requirements="{{ dplace.install_path }}/requirements.txt"
        virtualenv="/home/{{ dplace.user }}/{{ dplace.env_dir }}"
   sudo: yes
   sudo_user: "{{ dplace.user }}"
 
 - name: Configure DPLACE settings.py for DB
-  template: src=settings.py.j2 dest="/home/{{ dplace.user }}/{{ dplace.src_dir }}/dplace/settings.py"
+  template: src=settings.py.j2 dest="{{ dplace.install_path }}/dplace/settings.py"
   sudo: yes
   sudo_user: "{{ dplace.user }}"
 
 - name: Synchronize django db
-  django_manage: app_path="/home/{{ dplace.user }}/{{ dplace.src_dir }}" command=syncdb virtualenv="/home/{{ dplace.user }}/{{ dplace.env_dir }}"
+  django_manage: app_path="{{ dplace.install_path }}" command=syncdb virtualenv="/home/{{ dplace.user }}/{{ dplace.env_dir }}"
   sudo: yes
   sudo_user: "{{ dplace.user }}"
 
@@ -34,6 +34,6 @@
   sudo_user: dplace_user
 
 - name: Run django db migrations with south
-  django_manage: app_path="/home/{{ dplace.user }}/{{ dplace.src_dir }}" command=migrate virtualenv="/home/{{ dplace.user }}/{{ dplace.env_dir }}"
+  django_manage: app_path="{{ dplace.install_path }}" command=migrate virtualenv="/home/{{ dplace.user }}/{{ dplace.env_dir }}"
   sudo: yes
   sudo_user: "{{ dplace.user }}"

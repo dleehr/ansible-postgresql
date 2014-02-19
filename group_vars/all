@@ -43,3 +43,6 @@ dplace:
   db_name: dplace_dev
   db_user: dplace_user
   db_password: dplace_pass_changeme
+  django_admin_name: Your Name
+  django_admin_email: yourname@domain.tld
+  django_secret_key: makeSomethingUpAndPutItHere

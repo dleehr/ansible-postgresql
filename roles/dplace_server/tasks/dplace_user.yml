@@ -1,6 +1,6 @@
 ---
 - name: Create D-PLACE group
-  group: group={{ dplace.user }} gid=510
+  group: name={{ dplace.user }} gid=510
 
 - name: Create D-PLACE user
   user: name={{ dplace.user }} password={{ dplace.password }} shell="/bin/bash" uid=510 group={{ dplace.user }} generate_ssh_key=yes

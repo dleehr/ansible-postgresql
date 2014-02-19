@@ -22,5 +22,18 @@
   sudo: yes
   sudo_user: "{{ dplace.user }}"
 
-# Still todo:
-## django_manage migrate
+# After syncdb, column width of auth_permission.name is only 50 chars
+# With our verbose names, we will exceed 50, so raise the limit before loading data.
+# Must be done after tables created but before migration.
+#
+# See https://code.djangoproject.com/ticket/8162#comment:18
+#
+- name: Fix column width for auth_permission.name
+  shell: "psql {{ dplace.db_name }} -c \"alter table auth_permission alter column name type character varying(100);\""
+  sudo: yes
+  sudo_user: dplace_user
+
+- name: Run django db migrations with south
+  django_manage: app_path="/home/{{ dplace.user }}/{{ dplace.src_dir }}" command=migrate virtualenv="/home/{{ dplace.user }}/{{ dplace.env_dir }}"
+  sudo: yes
+  sudo_user: "{{ dplace.user }}"

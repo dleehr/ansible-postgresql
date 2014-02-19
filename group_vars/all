@@ -35,7 +35,7 @@ postgis:
   version: 2.1
 
 dplace:
-  repo: https://github.com/NESCent/dplace-models.git
+  repo: https://github.com/NESCent/dplace.git
   install_path: /var/django/dplace
   user: dplace_user
   password: dplace_pass_changeme

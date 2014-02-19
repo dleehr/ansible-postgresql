@@ -3,10 +3,14 @@
 - name: Clone D-PLACE repo
   git: repo={{ dplace.repo }}
        dest="/home/{{ dplace.user }}/{{ dplace.src_dir }}"
+  sudo: yes
+  sudo_user: "{{ dplace.user }}"
   
 - name: Install python dependencies in virtualenv
   pip: requirements="/home/{{ dplace.user }}/{{ dplace.src_dir }}/requirements.txt"
        virtualenv="/home/{{ dplace.user }}/{{ dplace.env_dir }}"
+  sudo: yes
+  sudo_user: "{{ dplace.user }}"
 
 # Still todo:
 ## Edit settings.py / settings.template

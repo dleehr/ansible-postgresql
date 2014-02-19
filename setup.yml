@@ -9,5 +9,6 @@
 
 - name: 'D-PLACE Playbook'
   hosts: dplace_servers
+  sudo: yes
   roles:
     - dplace_server

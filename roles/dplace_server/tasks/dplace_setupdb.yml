@@ -2,22 +2,23 @@
 # via https://github.com/ansible/ansible-examples/blob/master/language_features/postgresql.yml
 
 ---
+# Superuser is required to create extension.  Remove it after
+- name: Create Postgres user for D-PLACE
+  postgresql_user: name={{ dplace.db_user }} role_attr_flags=SUPERUSER,CREATEDB password={{ dplace.db_password }}
+  sudo: yes
+  sudo_user: postgres
+
 - name: Create Postgres database for D-PLACE
-  postgresql_db: name={{ dplace.db_name }}
+  postgresql_db: name={{ dplace.db_name }} login_user={{ dplace.db_user }} login_password={{ dplace.db_password }}
   sudo: yes
-  sudo_user: postgres
+  sudo_user: dplace_user
 
-- name: create the postgresql user for application
-  postgresql_user: name={{ dplace.db_user }}
-  sudo: yes
-  sudo_user: postgres
-
-- name: Set privileges
-  postgresql_user: name={{ dplace.db_user }} role_attr_flags=NOSUPERUSER,NOCREATEDB
-  sudo: yes
-  sudo_user: postgres
-  
 - name: Activate PostGIS extensions on dplace_db
   shell: "psql {{ dplace.db_name }} -c \"CREATE EXTENSION IF NOT EXISTS postgis;CREATE EXTENSION IF NOT EXISTS postgis_topology;\""
+  sudo: yes
+  sudo_user: dplace_user
+
+- name: Remove superuser role from Postgres user
+  postgresql_user: name={{ dplace.db_user }} role_attr_flags=NOSUPERUSER,CREATEDB password={{ dplace.db_password }}
   sudo: yes
   sudo_user: postgres

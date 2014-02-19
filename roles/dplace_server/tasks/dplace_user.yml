@@ -1,6 +1,9 @@
 ---
+- name: Create D-PLACE group
+  group: group={{ dplace.user }} gid=510
+
 - name: Create D-PLACE user
-  user: name={{ dplace.user }} password={{ dplace.password }} shell="/bin/bash"
+  user: name={{ dplace.user }} password={{ dplace.password }} shell="/bin/bash" uid=510 group={{ dplace.user }} generate_ssh_key=yes
 
 - name: Set ownership of source path
   file: path={{ dplace.install_path }} owner={{ dplace.user }} group={{ dplace.user }} state=directory

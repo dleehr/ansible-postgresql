@@ -13,7 +13,12 @@
   sudo_user: "{{ dplace.user }}"
 
 # Still todo:
-## Edit settings.py / settings.template
-## createdb in postgres
-## django_manage syncdb
+- name: Configure DPLACE settings.py for DB
+  template: src=settings.py.j2 dest="/home/{{ dplace.user }}/{{ dplace.src_dir }}/dplace/settings.py"
+  sudo: yes
+  sudo_user: "{{ dplace.user }}"
+
+- name: Synchronize django db
+  django_manage: app_path="/home/{{ dplace.user }}/{{ dplace.src_dir }}" command=syncdb virtualenv="/home/{{ dplace.user }}/{{ dplace.env_dir }}"
+
 ## django_manage migrate

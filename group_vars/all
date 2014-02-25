@@ -6,6 +6,9 @@ postgresql:
   user: postgres
   group: postgres
 
+  locale: 'en_US'
+  encoding: 'UTF-8'
+
   config:
     shared_buffers: 24MB
     work_mem: 1MB

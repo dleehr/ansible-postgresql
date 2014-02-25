@@ -1,4 +1,7 @@
 ---
+- name: Update locale
+  command: /usr/sbin/update-locale LANG={{ postgresql.locale }}.{{ postgresql.encoding }} LC_ALL={{ postgresql.locale }}.{{ postgresql.encoding }}
+
 - name: Install Postgresql server and client
   apt: pkg={{ item }}-{{ postgresql.version }} state=installed update-cache=yes
   register: postgresql_install

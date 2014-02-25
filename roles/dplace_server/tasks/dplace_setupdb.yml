@@ -9,7 +9,7 @@
   sudo_user: postgres
 
 - name: Create Postgres database for D-PLACE
-  postgresql_db: name={{ dplace.db_name }} login_user={{ dplace.db_user }} login_password={{ dplace.db_password }}
+  postgresql_db: name={{ dplace.db_name }} login_user={{ dplace.db_user }} login_password={{ dplace.db_password }} encoding={{ postgresql.encoding }} lc_ctype='{{ postgresql.locale }}.{{ postgresql.encoding }}' lc_collate='{{ postgresql.locale }}.{{ postgresql.encoding }}'
   sudo: yes
   sudo_user: dplace_user
 
